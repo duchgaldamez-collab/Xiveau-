@@ -4,53 +4,31 @@
   <meta charset="UTF-8" />
   <title>Xiveau – All-in-one home management (West Island)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Xiveau offers all-in-one home management on a simple subscription for West Island homeowners." />
+  <meta name="description" content="Xiveau offers all-in-one home management subscriptions for West Island homeowners." />
   <style>
     :root {
-      --primary: #1e88e5;
-      --primary-dark: #1565c0;
-      --accent: #43a047;
-      --bg: #f5f7fb;
-      --text: #222;
-      --muted: #666;
-      --white: #ffffff;
+      --bg: #f5f5f5;
+      --bg-alt: #ffffff;
+      --text: #111111;
+      --muted: #777777;
+      --border: #e0e0e0;
+      --border-strong: #c0c0c0;
       --shadow: 0 10px 25px rgba(0,0,0,0.06);
-      --radius-lg: 16px;
-      --radius-md: 10px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
       --radius-sm: 6px;
-      --border-subtle: #dfe5f2;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at top, #fafafa 0, #f0f0f0 40%, #f5f5f5 100%);
       color: var(--text);
       line-height: 1.6;
     }
+    a { text-decoration: none; color: inherit; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 16px; }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-
-    /* Header */
+    /* Header / Nav (shared) */
     header {
       display: flex;
       align-items: center;
@@ -59,34 +37,28 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(245,247,251,0.96);
-      backdrop-filter: blur(8px);
+      background: rgba(245,245,245,0.96);
+      backdrop-filter: blur(10px);
     }
-
-    /* Logo block (house + divider + wordmark) */
     .logo-brand {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-
     .logo-mark {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-
-    /* Solid techy house */
     .logo-house {
       position: relative;
       width: 34px;
       height: 26px;
       border-radius: 6px;
-      background: #2b343f;
+      background: #111111;
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-
     .logo-house::before {
       content: "";
       position: absolute;
@@ -95,55 +67,42 @@
       bottom: 100%;
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
-      border-bottom: 14px solid #2b343f;
+      border-bottom: 14px solid #111111;
     }
-
-    /* “Tech” chips instead of QR */
     .logo-chip {
       position: absolute;
       bottom: 4px;
       width: 9px;
       height: 9px;
       border-radius: 3px;
-      background: #e3f2fd;
-      border: 1px solid #90caf9;
+      background: #f5f5f5;
+      border: 1px solid #c0c0c0;
     }
-
-    .logo-chip.left {
-      left: 4px;
-    }
-
-    .logo-chip.right {
-      right: 4px;
-    }
-
+    .logo-chip.left { left: 4px; }
+    .logo-chip.right { right: 4px; }
     .logo-divider {
       width: 2px;
       height: 30px;
       border-radius: 999px;
-      background: #c0c7d6;
+      background: #d4d4d4;
     }
-
     .logo-text-block {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
-
     .logo-word {
       font-weight: 800;
       font-size: 1.1rem;
       letter-spacing: 0.01em;
       text-transform: lowercase;
     }
-
     .logo-tagline {
       font-size: 0.78rem;
       color: var(--muted);
       white-space: nowrap;
     }
 
-    /* Nav */
     nav {
       display: none;
       gap: 18px;
@@ -151,16 +110,9 @@
       color: var(--muted);
       align-items: center;
     }
+    nav a { padding: 4px 0; }
+    nav a:hover { color: #000000; }
 
-    nav a {
-      padding: 4px 0;
-    }
-
-    nav a:hover {
-      color: var(--primary-dark);
-    }
-
-    /* Hamburger */
     .hamburger {
       width: 28px;
       height: 22px;
@@ -169,22 +121,16 @@
       justify-content: space-between;
       cursor: pointer;
     }
-
     .hamburger span {
       height: 3px;
       border-radius: 999px;
-      background: #3c4a63;
+      background: #222222;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
-
     .hamburger.active span:nth-child(1) {
       transform: translateY(9px) rotate(45deg);
     }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
+    .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) {
       transform: translateY(-9px) rotate(-45deg);
     }
@@ -193,340 +139,139 @@
       display: none;
       flex-direction: column;
       gap: 8px;
-      background: var(--white);
+      background: #ffffff;
       border-radius: var(--radius-md);
       padding: 8px 12px 10px;
       box-shadow: var(--shadow);
       margin-bottom: 6px;
     }
-
-    .mobile-nav a {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .mobile-nav a:active {
-      color: var(--primary-dark);
-    }
-
-    /* Badge */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #e3f2fd;
-      color: #1565c0;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #43a047;
-    }
+    .mobile-nav a { font-size: 0.9rem; color: var(--muted); }
+    .mobile-nav a:active { color: #000000; }
 
     /* Hero */
     .hero {
       margin-top: 10px;
-      padding: 18px 16px 22px;
-      background: linear-gradient(135deg, #ffffff 0%, #f0f6ff 100%);
+      padding: 20px 18px 22px;
+      background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
       display: grid;
       grid-template-columns: 1fr;
       gap: 18px;
     }
-
+    .hero-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+    }
     .hero-title {
-      font-size: 1.7rem;
+      font-size: 1.8rem;
       line-height: 1.2;
       margin: 10px 0 6px;
     }
-
-    .hero-highlight {
-      color: var(--primary);
-    }
-
+    .hero-title span { font-weight: 800; }
     .hero-subtitle {
       color: var(--muted);
       font-size: 0.96rem;
       margin-bottom: 12px;
     }
-
     .hero-bullets {
       display: grid;
       gap: 4px;
       margin-bottom: 12px;
       font-size: 0.86rem;
     }
-
     .hero-bullets span::before {
-      content: "✓ ";
-      color: var(--accent);
+      content: "• ";
       font-weight: 600;
     }
-
     .hero-ctas {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 6px;
     }
-
     .btn-primary,
     .btn-secondary {
       border-radius: 999px;
       padding: 9px 16px;
       font-size: 0.88rem;
       font-weight: 600;
-      border: none;
+      border: 1px solid #111111;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       text-align: center;
+      background: transparent;
+      color: #111111;
     }
-
     .btn-primary {
-      background: var(--primary);
-      color: var(--white);
-      box-shadow: var(--shadow);
+      background: #111111;
+      color: #ffffff;
     }
-
-    .btn-primary:active {
-      background: var(--primary-dark);
-      transform: translateY(1px);
-    }
-
-    .btn-secondary {
-      background: #e3f2fd;
-      color: var(--primary-dark);
-    }
-
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-secondary { background: #f3f3f3; }
     .hero-note {
       font-size: 0.78rem;
       color: var(--muted);
     }
-
     .hero-card {
-      padding: 10px;
-      background: var(--white);
+      padding: 12px;
+      background: var(--bg-alt);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow);
       font-size: 0.8rem;
       display: grid;
       gap: 6px;
+      border: 1px dashed var(--border);
     }
-
-    .hero-card-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-tagline {
-      font-weight: 600;
+    .hero-card-title {
       font-size: 0.9rem;
+      font-weight: 600;
     }
+    .hero-card-body { color: var(--muted); }
 
-    .hero-mini {
-      color: var(--muted);
-      font-size: 0.75rem;
-    }
-
-    .hero-pill {
-      font-size: 0.72rem;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: #e8f5e9;
-      color: #2e7d32;
-      white-space: nowrap;
-    }
-
-    section {
-      margin-top: 22px;
-    }
-
+    /* Sections */
+    section { margin-top: 24px; }
     section h2 {
       font-size: 1.25rem;
       margin-bottom: 6px;
     }
-
     section p.section-intro {
       color: var(--muted);
       font-size: 0.87rem;
       margin-bottom: 12px;
     }
-
-    .cards-3,
-    .cards-2 {
+    .cards-3 {
       display: grid;
       gap: 10px;
     }
-
     .card {
-      background: var(--white);
+      background: var(--bg-alt);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow);
       padding: 10px 12px;
       font-size: 0.87rem;
+      border: 1px solid var(--border);
     }
-
     .card h3 {
       font-size: 0.96rem;
       margin-bottom: 4px;
     }
-
     .card p {
       color: var(--muted);
       font-size: 0.83rem;
     }
-
     .card-badge {
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--primary-dark);
+      color: var(--muted);
       margin-bottom: 2px;
     }
-
-    /* Pricing / packages */
-    .pricing-grid {
-      display: grid;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .package-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow);
-      padding: 10px 12px;
-      font-size: 0.87rem;
-      border: 1px solid var(--border-subtle);
-      cursor: pointer;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease, background 0.15s ease;
-    }
-
-    .package-card:hover {
-      border-color: var(--primary);
-      box-shadow: 0 8px 18px rgba(21,101,192,0.18);
-      transform: translateY(-1px);
-      background: #f9fbff;
-    }
-
-    .package-card.selected {
-      border-color: var(--primary);
-      box-shadow: 0 10px 24px rgba(21,101,192,0.23);
-      background: #e8f1ff;
-    }
-
-    .package-pill {
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #e3f2fd;
-      color: var(--primary-dark);
-      margin-bottom: 4px;
-      display: inline-block;
-    }
-
-    .package-title {
-      font-weight: 700;
-      font-size: 0.98rem;
-    }
-
-    .package-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .package-price {
-      margin-top: 4px;
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .package-price span {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--muted);
-    }
-
-    .package-list {
-      list-style: none;
-      margin-top: 4px;
-      display: grid;
-      gap: 2px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding-left: 0;
-    }
-
-    .package-list li::before {
-      content: "• ";
-      color: var(--accent);
-      font-weight: 900;
-    }
-
-    .package-footer {
-      margin-top: 6px;
-      font-size: 0.76rem;
-      color: var(--muted);
-    }
-
-    /* Contact */
-    .contact-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    form {
-      display: grid;
-      gap: 7px;
-    }
-
-    label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 7px 9px;
-      border-radius: var(--radius-sm);
-      border: 1px solid #d0d7e2;
-      font-size: 0.9rem;
-      font-family: inherit;
-      outline: none;
-      background: var(--white);
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 1px rgba(30,136,229,0.12);
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
     .footer {
       text-align: center;
       font-size: 0.78rem;
@@ -534,31 +279,11 @@
       padding: 14px 0 6px;
     }
 
-    /* Larger screens */
     @media (min-width: 720px) {
-      nav {
-        display: flex;
-      }
-      .hamburger,
-      .mobile-nav {
-        display: none !important;
-      }
-      .hero {
-        grid-template-columns: 3fr 2fr;
-      }
-      .cards-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      .cards-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .pricing-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      .contact-grid {
-        grid-template-columns: 3fr 2fr;
-        align-items: start;
-      }
+      nav { display: flex; }
+      .hamburger, .mobile-nav { display: none !important; }
+      .hero { grid-template-columns: 3fr 2fr; }
+      .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -579,226 +304,77 @@
         </div>
       </div>
 
-      <!-- Desktop nav -->
       <nav>
-        <a href="#how">How it works</a>
-        <a href="#services">Services</a>
-        <a href="#pricing">Plans</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="packages.html">Plans 💳</a>
+        <a href="testimonials.html">Testimonials 🗣️</a>
+        <a href="contact.html">Contact ✉️</a>
       </nav>
 
-      <!-- Mobile hamburger -->
       <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </div>
     </header>
 
-    <!-- Mobile nav menu -->
     <div class="mobile-nav" id="mobileNav">
-      <a href="#how">How it works</a>
-      <a href="#services">Services</a>
-      <a href="#pricing">Plans</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="packages.html">Plans 💳</a>
+      <a href="testimonials.html">Testimonials 🗣️</a>
+      <a href="contact.html">Contact ✉️</a>
     </div>
 
     <main>
       <!-- Hero -->
-      <section class="hero" id="top">
+      <section class="hero">
         <div>
-          <div class="badge">
-            <span class="badge-dot"></span>
-            All-in-one home management · West Island
-          </div>
-          <h1 class="hero-title">
-            Put your home on autopilot with <span class="hero-highlight">Xiveau</span>.
-          </h1>
+          <div class="hero-kicker">WEST ISLAND · PILOT</div>
+          <h1 class="hero-title">All-in-one home management for <span>busy homeowners 🏠</span></h1>
           <p class="hero-subtitle">
-            One subscription for West Island homeowners that bundles snow removal, lawn care, cleaning and small repairs — so you stop chasing contractors.
+            Xiveau bundles snow removal, lawn care, cleaning and small repairs into one simple subscription
+            for West Island homes — so you stop chasing contractors.
           </p>
-
           <div class="hero-bullets">
-            <span>From $199 to $399 / month</span>
+            <span>From <strong>$199 to $399 / month</strong>, all-in</span>
             <span>One contact, one bill, vetted local pros</span>
-            <span>Focused on the West Island (for now)</span>
+            <span>Designed for the West Island (for now)</span>
           </div>
-
           <div class="hero-ctas">
-            <a href="#pricing" class="btn-primary">See plans →</a>
-            <a href="#contact" class="btn-secondary">Request a call</a>
+            <a href="packages.html" class="btn-primary">View plans 💳</a>
+            <a href="contact.html" class="btn-secondary">Talk to us ✉️</a>
           </div>
-
-          <p class="hero-note">
-            Serving residential properties across the West Island of Montréal.
-          </p>
+          <p class="hero-note">No long contracts. We start with a simple yearly plan you can adjust.</p>
         </div>
 
         <div class="hero-card">
-          <div class="hero-card-row">
-            <div>
-              <div class="hero-tagline">Your “home manager” for regular people</div>
-              <div class="hero-mini">We coordinate, schedule and follow up. You just approve the plan.</div>
-            </div>
-            <div class="hero-pill">From $199 / month</div>
-          </div>
+          <div class="hero-card-title">“Like having a home COO.” 🤝</div>
+          <p class="hero-card-body">
+            You approve the plan. Xiveau coordinates the vendors, handles the follow-ups and keeps
+            everything in one place — snow, lawn, cleaning and small fixes.
+          </p>
         </div>
       </section>
 
       <!-- How it works -->
-      <section id="how">
-        <h2>How Xiveau works</h2>
+      <section>
+        <h2>How Xiveau works ⚙️</h2>
         <p class="section-intro">
-          Simple 3-step setup — after that, your home runs on a yearly plan instead of emergencies.
+          We turn random last-minute calls into a predictable yearly playbook for your home.
         </p>
         <div class="cards-3">
           <div class="card">
             <div class="card-badge">Step 1</div>
-            <h3>Quick home intake</h3>
-            <p>You tell us your address, home type and what you want off your plate this year.</p>
+            <h3>Quick intake 📝</h3>
+            <p>You share your West Island address, home type and the things you’re tired of managing.</p>
           </div>
           <div class="card">
             <div class="card-badge">Step 2</div>
-            <h3>Your custom plan</h3>
-            <p>We bundle snow, lawn, cleaning and small repairs into one tailored subscription.</p>
+            <h3>Custom plan 📅</h3>
+            <p>We propose a yearly schedule with services bundled into a clear monthly price.</p>
           </div>
           <div class="card">
             <div class="card-badge">Step 3</div>
-            <h3>We run the playbook</h3>
-            <p>We schedule and manage pre-vetted local pros. You get one bill and one contact.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Services -->
-      <section id="services">
-        <h2>Services you can bundle</h2>
-        <p class="section-intro">
-          Mix and match what you need for your West Island home. Plans are built around your priorities.
-        </p>
-        <div class="cards-2">
-          <div class="card">
-            <h3>Lawn care</h3>
-            <p>Seasonal mowing and basic yard maintenance so your property always looks cared for.</p>
-          </div>
-          <div class="card">
-            <h3>Snow removal</h3>
-            <p>Driveway and walkway clearing so you’re not outside with a shovel at 6 AM.</p>
-          </div>
-          <div class="card">
-            <h3>Cleaning</h3>
-            <p>Recurring housekeeping or seasonal deep cleans to reset the house.</p>
-          </div>
-          <div class="card">
-            <h3>Small repairs</h3>
-            <p>Minor fixes and handyman tasks coordinated without you having to call around.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Pricing / Packages -->
-      <section id="pricing">
-        <h2>Plans from $199 to $399 / month</h2>
-        <p class="section-intro">
-          Click a plan to select it. We always confirm details with you before anything starts.
-        </p>
-        <div class="pricing-grid">
-          <div class="package-card" data-package-name="Essential · $199 / month">
-            <div class="package-pill">Starter</div>
-            <div class="package-title">Essential</div>
-            <div class="package-sub">For smaller homes or lighter needs</div>
-            <ul class="package-list">
-              <li>Snow removal <strong>or</strong> lawn care (choose one focus)</li>
-              <li>1 seasonal deep clean per year</li>
-              <li>Email & text support</li>
-            </ul>
-            <div class="package-price">$199 / month <span>(typical West Island property)</span></div>
-            <div class="package-footer">Tap to pre-select this in the form.</div>
-          </div>
-
-          <div class="package-card" data-package-name="Comfort · $299 / month">
-            <div class="package-pill">Most popular</div>
-            <div class="package-title">Comfort</div>
-            <div class="package-sub">For busy families who want less mental load</div>
-            <ul class="package-list">
-              <li>Snow removal and lawn care</li>
-              <li>Monthly cleaning</li>
-              <li>Priority coordination & follow-up</li>
-            </ul>
-            <div class="package-price">$299 / month <span>(typical bundle)</span></div>
-            <div class="package-footer">Tap to pre-select this in the form.</div>
-          </div>
-
-          <div class="package-card" data-package-name="Total Care · $399 / month">
-            <div class="package-pill">All-in</div>
-            <div class="package-title">Total Care</div>
-            <div class="package-sub">For homeowners who want everything handled</div>
-            <ul class="package-list">
-              <li>Snow removal, lawn care and cleaning</li>
-              <li>Included handyman hours</li>
-              <li>Simple yearly plan for inside & outside</li>
-            </ul>
-            <div class="package-price">$399 / month <span>(larger properties)</span></div>
-            <div class="package-footer">Tap to pre-select this in the form.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact">
-        <h2>Want to see if Xiveau fits your home?</h2>
-        <div class="contact-grid">
-          <div>
-            <p class="section-intro">
-              Share your West Island address and what you’d like help with. We’ll follow up with a concrete example plan and pricing.
-            </p>
-            <form>
-              <div>
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Jane Doe" required />
-              </div>
-              <div>
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="you@example.com" required />
-              </div>
-              <div>
-                <label for="phone">Phone (optional)</label>
-                <input id="phone" name="phone" type="tel" placeholder="(XXX) XXX-XXXX" />
-              </div>
-              <div>
-                <label for="address">Address / Area (West Island)</label>
-                <input id="address" name="address" type="text" placeholder="Neighbourhood or address in the West Island" />
-              </div>
-              <div>
-                <label for="package">Selected package</label>
-                <select id="package" name="package">
-                  <option value="">No package selected yet</option>
-                  <option value="Essential · $199 / month">Essential · $199 / month</option>
-                  <option value="Comfort · $299 / month">Comfort · $299 / month</option>
-                  <option value="Total Care · $399 / month">Total Care · $399 / month</option>
-                </select>
-              </div>
-              <div>
-                <label for="message">What do you want off your plate?</label>
-                <textarea id="message" name="message" placeholder="Example: snow & lawn, plus cleaning once a month."></textarea>
-              </div>
-              <button type="submit" class="btn-primary">Send my request</button>
-            </form>
-          </div>
-          <div class="card">
-            <h3>What happens next?</h3>
-            <p style="font-size:0.85rem; color:var(--muted);">
-              You send us this quick form, we review your address and needs, then:
-            </p>
-            <ul class="package-list" style="margin-top:6px;">
-              <li>We confirm if you’re in the West Island zone</li>
-              <li>We send you an example yearly plan & quote</li>
-              <li>You decide if you want to go ahead</li>
-            </ul>
-            <p style="font-size:0.8rem; color:var(--muted); margin-top:8px;">
-              You can also email us directly at:
-            </p>
-            <p style="font-weight:600; font-size:0.9rem; margin-top:4px;">info@xiveau.com</p>
+            <h3>Done for you ✅</h3>
+            <p>We coordinate vetted local pros. You get one point of contact and one invoice.</p>
           </div>
         </div>
       </section>
@@ -810,20 +386,15 @@
   </div>
 
   <script>
-    // Year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Hamburger menu logic
     const hamburger = document.getElementById("hamburger");
     const mobileNav = document.getElementById("mobileNav");
-
     if (hamburger && mobileNav) {
       hamburger.addEventListener("click", () => {
         const isOpen = hamburger.classList.toggle("active");
         mobileNav.style.display = isOpen ? "flex" : "none";
         hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
-
       mobileNav.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", () => {
           hamburger.classList.remove("active");
@@ -832,27 +403,6 @@
         });
       });
     }
-
-    // Clickable packages → highlight + update select
-    const packageCards = document.querySelectorAll(".package-card");
-    const packageSelect = document.getElementById("package");
-
-    packageCards.forEach(card => {
-      card.addEventListener("click", () => {
-        packageCards.forEach(c => c.classList.remove("selected"));
-        card.classList.add("selected");
-
-        const name = card.getAttribute("data-package-name");
-        if (packageSelect && name) {
-          packageSelect.value = name;
-        }
-
-        const contactSection = document.getElementById("contact");
-        if (contactSection && window.innerWidth < 720) {
-          contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-    });
   </script>
 </body>
 </html>
