@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Xiveau – All-in-One Residential Services</title>
+  <title>Xiveau – All-in-one home management (West Island)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Xiveau offers all-in-one residential services on a simple subscription: snow removal, lawn care, cleaning and more in a single plan." />
+  <meta name="description" content="Xiveau offers all-in-one home management on a simple subscription for West Island homeowners." />
   <style>
     :root {
       --primary: #1e88e5;
@@ -18,6 +18,7 @@
       --radius-lg: 16px;
       --radius-md: 10px;
       --radius-sm: 6px;
+      --border-subtle: #dfe5f2;
     }
 
     * {
@@ -54,37 +55,161 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 0 8px;
+      padding: 8px 0 12px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245,247,251,0.96);
+      backdrop-filter: blur(8px);
     }
 
-    .logo {
+    /* Logo block (house + divider + wordmark) */
+    .logo-brand {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 12px;
-      background: radial-gradient(circle at 30% 20%, #ffffff 0, #ffffff 30%, #1e88e5 100%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Solid techy house */
+    .logo-house {
+      position: relative;
+      width: 34px;
+      height: 26px;
+      border-radius: 6px;
+      background: #2b343f;
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .logo-text {
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      font-size: 0.95rem;
-      text-transform: uppercase;
+    .logo-house::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 100%;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 14px solid #2b343f;
     }
 
+    /* “Tech” chips instead of QR */
+    .logo-chip {
+      position: absolute;
+      bottom: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 3px;
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+    }
+
+    .logo-chip.left {
+      left: 4px;
+    }
+
+    .logo-chip.right {
+      right: 4px;
+    }
+
+    .logo-divider {
+      width: 2px;
+      height: 30px;
+      border-radius: 999px;
+      background: #c0c7d6;
+    }
+
+    .logo-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-word {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+      text-transform: lowercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* Nav */
     nav {
       display: none;
       gap: 18px;
       font-size: 0.9rem;
       color: var(--muted);
+      align-items: center;
     }
 
+    nav a {
+      padding: 4px 0;
+    }
+
+    nav a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      width: 28px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      border-radius: 999px;
+      background: #3c4a63;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 8px 12px 10px;
+      box-shadow: var(--shadow);
+      margin-bottom: 6px;
+    }
+
+    .mobile-nav a {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .mobile-nav a:active {
+      color: var(--primary-dark);
+    }
+
+    /* Badge */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -108,7 +233,7 @@
     /* Hero */
     .hero {
       margin-top: 10px;
-      padding: 20px 18px 28px;
+      padding: 18px 16px 22px;
       background: linear-gradient(135deg, #ffffff 0%, #f0f6ff 100%);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
@@ -118,9 +243,9 @@
     }
 
     .hero-title {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       line-height: 1.2;
-      margin: 10px 0 8px;
+      margin: 10px 0 6px;
     }
 
     .hero-highlight {
@@ -129,15 +254,15 @@
 
     .hero-subtitle {
       color: var(--muted);
-      font-size: 0.98rem;
-      margin-bottom: 16px;
+      font-size: 0.96rem;
+      margin-bottom: 12px;
     }
 
     .hero-bullets {
       display: grid;
-      gap: 6px;
-      margin-bottom: 16px;
-      font-size: 0.9rem;
+      gap: 4px;
+      margin-bottom: 12px;
+      font-size: 0.86rem;
     }
 
     .hero-bullets span::before {
@@ -150,14 +275,14 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
 
     .btn-primary,
     .btn-secondary {
       border-radius: 999px;
-      padding: 10px 18px;
-      font-size: 0.9rem;
+      padding: 9px 16px;
+      font-size: 0.88rem;
       font-weight: 600;
       border: none;
       cursor: pointer;
@@ -185,12 +310,12 @@
     }
 
     .hero-note {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
     }
 
     .hero-card {
-      padding: 12px;
+      padding: 10px;
       background: var(--white);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow);
@@ -203,15 +328,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 6px;
-    }
-
-    .hero-pill {
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: #e8f5e9;
-      color: #2e7d32;
+      gap: 8px;
     }
 
     .hero-tagline {
@@ -224,44 +341,52 @@
       font-size: 0.75rem;
     }
 
-    /* Sections */
+    .hero-pill {
+      font-size: 0.72rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      white-space: nowrap;
+    }
+
     section {
-      margin-top: 26px;
+      margin-top: 22px;
     }
 
     section h2 {
       font-size: 1.25rem;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     section p.section-intro {
       color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 16px;
+      font-size: 0.87rem;
+      margin-bottom: 12px;
     }
 
     .cards-3,
     .cards-2 {
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .card {
       background: var(--white);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow);
-      padding: 14px;
-      font-size: 0.9rem;
+      padding: 10px 12px;
+      font-size: 0.87rem;
     }
 
     .card h3 {
-      font-size: 1rem;
-      margin-bottom: 6px;
+      font-size: 0.96rem;
+      margin-bottom: 4px;
     }
 
     .card p {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.83rem;
     }
 
     .card-badge {
@@ -269,139 +394,106 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--primary-dark);
+      margin-bottom: 2px;
+    }
+
+    /* Pricing / packages */
+    .pricing-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .package-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      padding: 10px 12px;
+      font-size: 0.87rem;
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease, background 0.15s ease;
+    }
+
+    .package-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 8px 18px rgba(21,101,192,0.18);
+      transform: translateY(-1px);
+      background: #f9fbff;
+    }
+
+    .package-card.selected {
+      border-color: var(--primary);
+      box-shadow: 0 10px 24px rgba(21,101,192,0.23);
+      background: #e8f1ff;
+    }
+
+    .package-pill {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e3f2fd;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    .package-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .package-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
       margin-bottom: 4px;
     }
 
-    .list-check {
-      list-style: none;
-      display: grid;
-      gap: 4px;
-      margin-top: 6px;
-      padding-left: 0;
-      font-size: 0.85rem;
+    .package-price {
+      margin-top: 4px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .package-price span {
+      font-size: 0.78rem;
+      font-weight: 500;
       color: var(--muted);
     }
 
-    .list-check li::before {
+    .package-list {
+      list-style: none;
+      margin-top: 4px;
+      display: grid;
+      gap: 2px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-left: 0;
+    }
+
+    .package-list li::before {
       content: "• ";
       color: var(--accent);
       font-weight: 900;
     }
 
-    /* Pricing */
-    .pricing-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 8px;
-    }
-
-    .pricing-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow);
-      padding: 14px;
-      font-size: 0.9rem;
-      border: 1px solid #e3f2fd;
-    }
-
-    .pricing-card.highlight {
-      border-color: var(--primary);
-      position: relative;
-    }
-
-    .pricing-pill {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #e3f2fd;
-      color: var(--primary-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .pricing-title {
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    .pricing-sub {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .pricing-price {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-top: 8px;
-    }
-
-    .pricing-price span {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--muted);
-    }
-
-    /* Reviews */
-    .reviews {
-      display: grid;
-      gap: 10px;
-    }
-
-    .review {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow);
-      padding: 12px;
-      font-size: 0.85rem;
-    }
-
-    .review-text {
-      margin-bottom: 6px;
-      color: var(--muted);
-    }
-
-    .review-name {
-      font-weight: 600;
-      font-size: 0.85rem;
-    }
-
-    /* FAQ */
-    .faq {
-      display: grid;
-      gap: 10px;
-      font-size: 0.9rem;
-    }
-
-    .faq-item {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow);
-      padding: 10px 12px;
-    }
-
-    .faq-item h3 {
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .faq-item p {
-      font-size: 0.85rem;
+    .package-footer {
+      margin-top: 6px;
+      font-size: 0.76rem;
       color: var(--muted);
     }
 
     /* Contact */
     .contact-grid {
       display: grid;
-      gap: 14px;
+      gap: 12px;
     }
 
     form {
       display: grid;
-      gap: 8px;
+      gap: 7px;
     }
 
     label {
@@ -411,38 +503,45 @@
     }
 
     input,
-    textarea {
+    textarea,
+    select {
       width: 100%;
-      padding: 8px 10px;
+      padding: 7px 9px;
       border-radius: var(--radius-sm);
       border: 1px solid #d0d7e2;
       font-size: 0.9rem;
       font-family: inherit;
       outline: none;
+      background: var(--white);
     }
 
     input:focus,
-    textarea:focus {
+    textarea:focus,
+    select:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 1px rgba(30,136,229,0.12);
     }
 
     textarea {
-      min-height: 100px;
+      min-height: 90px;
       resize: vertical;
     }
 
     .footer {
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      padding: 18px 0 8px;
+      padding: 14px 0 6px;
     }
 
     /* Larger screens */
     @media (min-width: 720px) {
       nav {
         display: flex;
+      }
+      .hamburger,
+      .mobile-nav {
+        display: none !important;
       }
       .hero {
         grid-template-columns: 3fr 2fr;
@@ -466,17 +565,43 @@
 <body>
   <div class="page">
     <header>
-      <div class="logo">
-        <div class="logo-mark" aria-hidden="true"></div>
-        <div class="logo-text">XIVEAU</div>
+      <div class="logo-brand">
+        <div class="logo-mark" aria-hidden="true">
+          <div class="logo-house">
+            <div class="logo-chip left"></div>
+            <div class="logo-chip right"></div>
+          </div>
+          <div class="logo-divider"></div>
+        </div>
+        <div class="logo-text-block">
+          <div class="logo-word">xiveau</div>
+          <div class="logo-tagline">All-in-one home management</div>
+        </div>
       </div>
+
+      <!-- Desktop nav -->
       <nav>
         <a href="#how">How it works</a>
         <a href="#services">Services</a>
-        <a href="#pricing">Pricing</a>
+        <a href="#pricing">Plans</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <!-- Mobile hamburger -->
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </header>
+
+    <!-- Mobile nav menu -->
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#how">How it works</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Plans</a>
+      <a href="#contact">Contact</a>
+    </div>
 
     <main>
       <!-- Hero -->
@@ -484,44 +609,38 @@
         <div>
           <div class="badge">
             <span class="badge-dot"></span>
-            All-in-one residential services
+            All-in-one home management · West Island
           </div>
           <h1 class="hero-title">
-            Xiveau – <span class="hero-highlight">Home services on autopilot</span>.
+            Put your home on autopilot with <span class="hero-highlight">Xiveau</span>.
           </h1>
           <p class="hero-subtitle">
-            Snow removal, lawn care, window cleaning and more — bundled into one simple subscription so you never have to chase contractors again.
+            One subscription for West Island homeowners that bundles snow removal, lawn care, cleaning and small repairs — so you stop chasing contractors.
           </p>
 
           <div class="hero-bullets">
-            <span>One point of contact for all your home services</span>
-            <span>Pre-vetted local professionals</span>
-            <span>Clear monthly pricing, no surprises</span>
+            <span>From $199 to $399 / month</span>
+            <span>One contact, one bill, vetted local pros</span>
+            <span>Focused on the West Island (for now)</span>
           </div>
 
           <div class="hero-ctas">
-            <a href="#contact" class="btn-primary">Get my custom quote →</a>
-            <a href="#pricing" class="btn-secondary">See what’s included</a>
+            <a href="#pricing" class="btn-primary">See plans →</a>
+            <a href="#contact" class="btn-secondary">Request a call</a>
           </div>
 
           <p class="hero-note">
-            Serving residential homes in the West Island of Montréal and nearby areas.
+            Serving residential properties across the West Island of Montréal.
           </p>
         </div>
 
         <div class="hero-card">
           <div class="hero-card-row">
             <div>
-              <div class="hero-tagline">Your home, fully managed</div>
-              <div class="hero-mini">Lawn • Snow • Cleaning • Repairs</div>
+              <div class="hero-tagline">Your “home manager” for regular people</div>
+              <div class="hero-mini">We coordinate, schedule and follow up. You just approve the plan.</div>
             </div>
-            <div class="hero-pill">One monthly bill</div>
-          </div>
-          <hr style="border:none;border-top:1px dashed #e0e5f0; margin: 8px 0;">
-          <div class="hero-card-row">
-            <div class="hero-mini">
-              “Since Xiveau, I don’t think about home maintenance. It just gets done.”
-            </div>
+            <div class="hero-pill">From $199 / month</div>
           </div>
         </div>
       </section>
@@ -530,211 +649,108 @@
       <section id="how">
         <h2>How Xiveau works</h2>
         <p class="section-intro">
-          We turn a mess of disconnected contractors into one clean, simple home service plan.
+          Simple 3-step setup — after that, your home runs on a yearly plan instead of emergencies.
         </p>
         <div class="cards-3">
           <div class="card">
             <div class="card-badge">Step 1</div>
-            <h3>Tell us about your home</h3>
-            <p>
-              Share your address, home type and the services you need through a quick form or call.
-            </p>
+            <h3>Quick home intake</h3>
+            <p>You tell us your address, home type and what you want off your plate this year.</p>
           </div>
           <div class="card">
             <div class="card-badge">Step 2</div>
-            <h3>We build your service plan</h3>
-            <p>
-              We bundle snow, lawn, cleaning and more into one tailored subscription that fits your reality.
-            </p>
+            <h3>Your custom plan</h3>
+            <p>We bundle snow, lawn, cleaning and small repairs into one tailored subscription.</p>
           </div>
           <div class="card">
             <div class="card-badge">Step 3</div>
-            <h3>We coordinate everything</h3>
-            <p>
-              Xiveau manages vendors, schedules visits and monitors quality. You get one bill and one point of contact.
-            </p>
+            <h3>We run the playbook</h3>
+            <p>We schedule and manage pre-vetted local pros. You get one bill and one contact.</p>
           </div>
         </div>
       </section>
 
       <!-- Services -->
       <section id="services">
-        <h2>Everything your home needs, in one place</h2>
+        <h2>Services you can bundle</h2>
         <p class="section-intro">
-          Mix and match services into a package that keeps your property in top shape all year long.
+          Mix and match what you need for your West Island home. Plans are built around your priorities.
         </p>
         <div class="cards-2">
           <div class="card">
-            <h3>Lawn care & seasonal clean-ups</h3>
-            <p>Regular mowing, trimming and spring/fall clean-ups to keep your yard looking sharp.</p>
+            <h3>Lawn care</h3>
+            <p>Seasonal mowing and basic yard maintenance so your property always looks cared for.</p>
           </div>
           <div class="card">
-            <h3>Snow removal & de-icing</h3>
-            <p>Driveway and walkway clearing so you never have to shovel at 6 AM again.</p>
+            <h3>Snow removal</h3>
+            <p>Driveway and walkway clearing so you’re not outside with a shovel at 6 AM.</p>
           </div>
           <div class="card">
-            <h3>Window & gutter cleaning</h3>
-            <p>Crystal clear windows and flowing gutters, scheduled proactively through the year.</p>
+            <h3>Cleaning</h3>
+            <p>Recurring housekeeping or seasonal deep cleans to reset the house.</p>
           </div>
           <div class="card">
-            <h3>Housekeeping & deep cleaning</h3>
-            <p>Recurring or seasonal cleaning to keep your home fresh without the stress.</p>
-          </div>
-          <div class="card">
-            <h3>Small repairs & handyman tasks</h3>
-            <p>From minor fixes to small projects, we’ll match you with the right pro.</p>
-          </div>
-          <div class="card">
-            <h3>Exterior care & inspections</h3>
-            <p>Pressure washing, exterior checks and seasonal inspections for peace of mind.</p>
+            <h3>Small repairs</h3>
+            <p>Minor fixes and handyman tasks coordinated without you having to call around.</p>
           </div>
         </div>
       </section>
 
-      <!-- Why Xiveau -->
-      <section id="why">
-        <h2>Why homeowners choose Xiveau</h2>
-        <p class="section-intro">
-          Not just another contractor directory — a true partner managing your home like an asset.
-        </p>
-        <div class="cards-2">
-          <div class="card">
-            <h3>One subscription, many services</h3>
-            <ul class="list-check">
-              <li>Bundle snow, lawn, cleaning and more in one plan</li>
-              <li>No juggling multiple phone numbers and invoices</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Pre-vetted local professionals</h3>
-            <ul class="list-check">
-              <li>Work only with trusted, insured providers</li>
-              <li>We monitor quality and handle issues for you</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Predictable monthly cost</h3>
-            <ul class="list-check">
-              <li>Transparent pricing, no surprise add-ons</li>
-              <li>One bill instead of a pile of random charges</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Time back in your life</h3>
-            <ul class="list-check">
-              <li>Weekends without coordination stress</li>
-              <li>We think ahead so you don’t have to</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- Pricing -->
+      <!-- Pricing / Packages -->
       <section id="pricing">
-        <h2>Flexible plans for every type of home</h2>
+        <h2>Plans from $199 to $399 / month</h2>
         <p class="section-intro">
-          Every home is unique. These plans are examples — we’ll fine-tune yours after a quick conversation.
+          Click a plan to select it. We always confirm details with you before anything starts.
         </p>
         <div class="pricing-grid">
-          <div class="pricing-card">
-            <div class="pricing-title">Essential</div>
-            <div class="pricing-sub">Ideal for condos & small homes</div>
-            <ul class="list-check">
-              <li>Lawn care (in season)</li>
-              <li>Snow removal (driveway & walkway)</li>
-              <li>Annual exterior window cleaning</li>
-              <li>Email support</li>
+          <div class="package-card" data-package-name="Essential · $199 / month">
+            <div class="package-pill">Starter</div>
+            <div class="package-title">Essential</div>
+            <div class="package-sub">For smaller homes or lighter needs</div>
+            <ul class="package-list">
+              <li>Snow removal <strong>or</strong> lawn care (choose one focus)</li>
+              <li>1 seasonal deep clean per year</li>
+              <li>Email & text support</li>
             </ul>
-            <div class="pricing-price">From $XXX / month <span>(depending on property)</span></div>
+            <div class="package-price">$199 / month <span>(typical West Island property)</span></div>
+            <div class="package-footer">Tap to pre-select this in the form.</div>
           </div>
 
-          <div class="pricing-card highlight">
-            <div class="pricing-pill">Most popular</div>
-            <div class="pricing-title">Comfort</div>
-            <div class="pricing-sub">Perfect for busy families</div>
-            <ul class="list-check">
-              <li>Everything in Essential</li>
-              <li>Monthly housekeeping</li>
-              <li>Spring & fall clean-ups</li>
-              <li>Priority support</li>
+          <div class="package-card" data-package-name="Comfort · $299 / month">
+            <div class="package-pill">Most popular</div>
+            <div class="package-title">Comfort</div>
+            <div class="package-sub">For busy families who want less mental load</div>
+            <ul class="package-list">
+              <li>Snow removal and lawn care</li>
+              <li>Monthly cleaning</li>
+              <li>Priority coordination & follow-up</li>
             </ul>
-            <div class="pricing-price">From $XXX / month <span>(custom quote)</span></div>
+            <div class="package-price">$299 / month <span>(typical bundle)</span></div>
+            <div class="package-footer">Tap to pre-select this in the form.</div>
           </div>
 
-          <div class="pricing-card">
-            <div class="pricing-title">Total Care</div>
-            <div class="pricing-sub">For maximum peace of mind</div>
-            <ul class="list-check">
-              <li>Everything in Comfort</li>
+          <div class="package-card" data-package-name="Total Care · $399 / month">
+            <div class="package-pill">All-in</div>
+            <div class="package-title">Total Care</div>
+            <div class="package-sub">For homeowners who want everything handled</div>
+            <ul class="package-list">
+              <li>Snow removal, lawn care and cleaning</li>
               <li>Included handyman hours</li>
-              <li>Seasonal safety inspections</li>
-              <li>Dedicated home coordinator</li>
+              <li>Simple yearly plan for inside & outside</li>
             </ul>
-            <div class="pricing-price">From $XXX / month <span>(contact us)</span></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Reviews -->
-      <section id="reviews">
-        <h2>What clients say</h2>
-        <p class="section-intro">
-          Real feedback from homeowners who handed Xiveau their to-do list.
-        </p>
-        <div class="reviews">
-          <div class="review">
-            <div class="review-text">
-              “Since we switched to Xiveau, I don’t even think about snow, lawn or windows anymore. It just gets done.”
-            </div>
-            <div class="review-name">— Homeowner in the West Island</div>
-          </div>
-          <div class="review">
-            <div class="review-text">
-              “One bill, one contact, and my weekends are mine again. Xiveau feels like a home manager for regular people.”
-            </div>
-            <div class="review-name">— Xiveau Client</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section id="faq">
-        <h2>Frequently asked questions</h2>
-        <div class="faq">
-          <div class="faq-item">
-            <h3>What areas do you serve?</h3>
-            <p>
-              We currently serve residential clients in the West Island of Montréal and nearby neighbourhoods. If you’re just outside this area, contact us and we’ll see what’s possible.
-            </p>
-          </div>
-          <div class="faq-item">
-            <h3>Is Xiveau a marketplace or the actual provider?</h3>
-            <p>
-              Xiveau manages and coordinates a network of vetted local professionals. You deal with us as your single contact — we handle scheduling, quality and payments with vendors.
-            </p>
-          </div>
-          <div class="faq-item">
-            <h3>Can I change or pause my plan?</h3>
-            <p>
-              Yes. Plans can typically be adjusted or paused with advance notice. We’ll walk you through options based on your services.
-            </p>
-          </div>
-          <div class="faq-item">
-            <h3>Do I need to sign a long-term contract?</h3>
-            <p>
-              We believe in earning your trust, not locking you in. Terms depend on your services, but we favour flexible agreements.
-            </p>
+            <div class="package-price">$399 / month <span>(larger properties)</span></div>
+            <div class="package-footer">Tap to pre-select this in the form.</div>
           </div>
         </div>
       </section>
 
       <!-- Contact -->
       <section id="contact">
-        <h2>Ready to put your home on autopilot?</h2>
+        <h2>Want to see if Xiveau fits your home?</h2>
         <div class="contact-grid">
           <div>
             <p class="section-intro">
-              Tell us a bit about your property and what you’d like to stop worrying about. We’ll follow up with a custom Xiveau plan and clear pricing.
+              Share your West Island address and what you’d like help with. We’ll follow up with a concrete example plan and pricing.
             </p>
             <form>
               <div>
@@ -750,38 +766,93 @@
                 <input id="phone" name="phone" type="tel" placeholder="(XXX) XXX-XXXX" />
               </div>
               <div>
-                <label for="address">Address / Area</label>
-                <input id="address" name="address" type="text" placeholder="Neighbourhood or address" />
+                <label for="address">Address / Area (West Island)</label>
+                <input id="address" name="address" type="text" placeholder="Neighbourhood or address in the West Island" />
               </div>
               <div>
-                <label for="message">What do you need help with?</label>
-                <textarea id="message" name="message" placeholder="Tell us about your home and the services you’re looking for."></textarea>
+                <label for="package">Selected package</label>
+                <select id="package" name="package">
+                  <option value="">No package selected yet</option>
+                  <option value="Essential · $199 / month">Essential · $199 / month</option>
+                  <option value="Comfort · $299 / month">Comfort · $299 / month</option>
+                  <option value="Total Care · $399 / month">Total Care · $399 / month</option>
+                </select>
+              </div>
+              <div>
+                <label for="message">What do you want off your plate?</label>
+                <textarea id="message" name="message" placeholder="Example: snow & lawn, plus cleaning once a month."></textarea>
               </div>
               <button type="submit" class="btn-primary">Send my request</button>
             </form>
           </div>
           <div class="card">
-            <h3>Prefer to talk?</h3>
-            <p style="font-size:0.9rem; color:var(--muted);">
-              Add your phone number and we’ll reach out to walk you through options, or email us directly at:
+            <h3>What happens next?</h3>
+            <p style="font-size:0.85rem; color:var(--muted);">
+              You send us this quick form, we review your address and needs, then:
             </p>
-            <p style="font-weight:600; margin-top:6px;">info@xiveau.com</p>
-            <p style="font-size:0.8rem; color:var(--muted); margin-top:10px;">
-              Typical response time: under 1 business day.
+            <ul class="package-list" style="margin-top:6px;">
+              <li>We confirm if you’re in the West Island zone</li>
+              <li>We send you an example yearly plan & quote</li>
+              <li>You decide if you want to go ahead</li>
+            </ul>
+            <p style="font-size:0.8rem; color:var(--muted); margin-top:8px;">
+              You can also email us directly at:
             </p>
+            <p style="font-weight:600; font-size:0.9rem; margin-top:4px;">info@xiveau.com</p>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      © <span id="year"></span> Xiveau. All rights reserved.
+      © <span id="year"></span> Xiveau · All-in-one home management · West Island
     </footer>
   </div>
 
   <script>
-    // Set current year in footer
+    // Year in footer
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Hamburger menu logic
+    const hamburger = document.getElementById("hamburger");
+    const mobileNav = document.getElementById("mobileNav");
+
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener("click", () => {
+        const isOpen = hamburger.classList.toggle("active");
+        mobileNav.style.display = isOpen ? "flex" : "none";
+        hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      mobileNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          mobileNav.style.display = "none";
+          hamburger.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    // Clickable packages → highlight + update select
+    const packageCards = document.querySelectorAll(".package-card");
+    const packageSelect = document.getElementById("package");
+
+    packageCards.forEach(card => {
+      card.addEventListener("click", () => {
+        packageCards.forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+
+        const name = card.getAttribute("data-package-name");
+        if (packageSelect && name) {
+          packageSelect.value = name;
+        }
+
+        const contactSection = document.getElementById("contact");
+        if (contactSection && window.innerWidth < 720) {
+          contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
   </script>
 </body>
 </html>
