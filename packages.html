@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xiveau Plans – All-in-one home management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --bg-alt: #ffffff;
+      --text: #111111;
+      --muted: #777777;
+      --border: #e0e0e0;
+      --shadow: 0 10px 25px rgba(0,0,0,0.06);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 6px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 16px; }
+
+    /* Shared header */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 0 12px;
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(245,245,245,0.96); backdrop-filter: blur(10px);
+    }
+    .logo-brand { display:flex; align-items:center; gap:10px; }
+    .logo-mark { display:flex; align-items:center; gap:10px; }
+    .logo-house {
+      position: relative; width:34px; height:26px;
+      border-radius:6px; background:#111; box-shadow:var(--shadow); overflow:hidden;
+    }
+    .logo-house::before {
+      content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:100%;
+      border-left:20px solid transparent; border-right:20px solid transparent;
+      border-bottom:14px solid #111;
+    }
+    .logo-chip { position:absolute; bottom:4px; width:9px; height:9px; border-radius:3px;
+      background:#f5f5f5; border:1px solid #c0c0c0; }
+    .logo-chip.left { left:4px; } .logo-chip.right { right:4px; }
+    .logo-divider { width:2px; height:30px; border-radius:999px; background:#d4d4d4; }
+    .logo-text-block { display:flex; flex-direction:column; gap:2px; }
+    .logo-word { font-weight:800; font-size:1.1rem; text-transform:lowercase; }
+    .logo-tagline { font-size:0.78rem; color:var(--muted); white-space:nowrap; }
+
+    nav { display:none; gap:18px; font-size:0.9rem; color:var(--muted); align-items:center; }
+    nav a { padding:4px 0; }
+    nav a:hover { color:#000; }
+
+    .hamburger {
+      width:28px; height:22px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer;
+    }
+    .hamburger span { height:3px; border-radius:999px; background:#222; transition:transform .2s, opacity .2s; }
+    .hamburger.active span:nth-child(1){ transform:translateY(9px) rotate(45deg); }
+    .hamburger.active span:nth-child(2){ opacity:0; }
+    .hamburger.active span:nth-child(3){ transform:translateY(-9px) rotate(-45deg); }
+
+    .mobile-nav {
+      display:none; flex-direction:column; gap:8px;
+      background:#fff; border-radius:var(--radius-md);
+      padding:8px 12px 10px; box-shadow:var(--shadow); margin-bottom:6px;
+    }
+    .mobile-nav a { font-size:0.9rem; color:var(--muted); }
+
+    main { margin-top:10px; }
+    h1 { font-size:1.6rem; margin-bottom:4px; }
+    .subtitle { color:var(--muted); font-size:0.9rem; margin-bottom:16px; }
+
+    /* Carousel */
+    .carousel-wrapper {
+      position: relative;
+      margin-top: 10px;
+      background: linear-gradient(135deg,#ffffff,#f7f7f7);
+      border-radius: var(--radius-lg);
+      padding: 18px 12px 20px;
+      box-shadow: var(--shadow);
+    }
+    .carousel-header {
+      display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;
+    }
+    .carousel-header span { font-size:0.85rem; color:var(--muted); }
+
+    .carousel-viewport {
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.25s ease-out;
+    }
+    .plan-card {
+      min-width: 100%;
+      max-width: 100%;
+      padding: 14px 12px;
+      background:#fff;
+      border-radius: var(--radius-md);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      font-size:0.9rem;
+    }
+
+    .plan-tag { font-size:0.74rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:4px; }
+    .plan-title { font-size:1.1rem; font-weight:700; margin-bottom:2px; }
+    .plan-price { font-size:1rem; font-weight:700; margin:4px 0 2px; }
+    .plan-price span { font-size:0.8rem; color:var(--muted); font-weight:400; }
+    .plan-list { list-style:none; padding-left:0; margin-top:6px; display:grid; gap:3px; font-size:0.83rem; color:var(--muted); }
+    .plan-list li::before { content:"• "; font-weight:600; }
+    .plan-note { font-size:0.78rem; color:var(--muted); margin-top:8px; }
+
+    .carousel-controls {
+      display:flex; justify-content:space-between; align-items:center; margin-top:10px;
+    }
+    .carousel-buttons { display:flex; gap:8px; }
+    .carousel-btn {
+      width:32px; height:32px; border-radius:999px;
+      border:1px solid var(--border); background:#fff; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+    }
+    .carousel-indicator { font-size:0.8rem; color:var(--muted); }
+
+    .link-row {
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; font-size:0.88rem;
+    }
+    .link-row a {
+      border-radius:999px; padding:7px 14px; border:1px solid var(--border); background:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .footer { text-align:center; font-size:0.78rem; color:var(--muted); padding:14px 0 6px; }
+
+    @media (min-width:720px){
+      nav{display:flex;}
+      .hamburger,.mobile-nav{display:none!important;}
+      .plan-card{min-width:60%; max-width:60%; margin:0 auto;}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo-brand">
+        <div class="logo-mark" aria-hidden="true">
+          <div class="logo-house">
+            <div class="logo-chip left"></div><div class="logo-chip right"></div>
+          </div>
+          <div class="logo-divider"></div>
+        </div>
+        <div class="logo-text-block">
+          <div class="logo-word">xiveau</div>
+          <div class="logo-tagline">All-in-one home management</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="packages.html">Plans 💳</a>
+        <a href="testimonials.html">Testimonials 🗣️</a>
+        <a href="contact.html">Contact ✉️</a>
+      </nav>
+
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </div>
+    </header>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html">Home</a>
+      <a href="packages.html">Plans 💳</a>
+      <a href="testimonials.html">Testimonials 🗣️</a>
+      <a href="contact.html">Contact ✉️</a>
+    </div>
+
+    <main>
+      <h1>Plans for West Island homes 💳</h1>
+      <p class="subtitle">
+        Three simple tiers. Tap or click through the carousel and imagine what your life looks like
+        with Xiveau running your home.
+      </p>
+
+      <div class="carousel-wrapper">
+        <div class="carousel-header">
+          <strong>From $199 to $399 / month</strong>
+          <span>Swipe or tap ◀ ▶</span>
+        </div>
+
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carouselTrack">
+            <!-- Slide 1 -->
+            <article class="plan-card">
+              <div class="plan-tag">Starter · Lighter needs</div>
+              <div class="plan-title">Essential</div>
+              <div class="plan-price">$199 / month <span>typical West Island home</span></div>
+              <ul class="plan-list">
+                <li>Snow removal <strong>or</strong> lawn care (choose your focus)</li>
+                <li>1 seasonal deep clean per year</li>
+                <li>Centralized texting for requests</li>
+              </ul>
+              <p class="plan-note">Great if you already have some services in place and want to test Xiveau.</p>
+            </article>
+
+            <!-- Slide 2 -->
+            <article class="plan-card">
+              <div class="plan-tag">Most popular · Busy families</div>
+              <div class="plan-title">Comfort</div>
+              <div class="plan-price">$299 / month <span>balanced bundle</span></div>
+              <ul class="plan-list">
+                <li>Snow removal <em>and</em> lawn care included</li>
+                <li>Monthly cleaning visit</li>
+                <li>Priority coordination & reminders</li>
+              </ul>
+              <p class="plan-note">Designed so weekends feel like weekends again, not catch-up time.</p>
+            </article>
+
+            <!-- Slide 3 -->
+            <article class="plan-card">
+              <div class="plan-tag">All-in · Zero mental load</div>
+              <div class="plan-title">Total Care</div>
+              <div class="plan-price">$399 / month <span>larger properties</span></div>
+              <ul class="plan-list">
+                <li>Snow, lawn, and cleaning all baked in</li>
+                <li>Included handyman hours for small fixes</li>
+                <li>Simple yearly playbook for your home</li>
+              </ul>
+              <p class="plan-note">For people who want their home treated like an asset, not a to-do list.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <div class="carousel-buttons">
+            <button class="carousel-btn" id="prevBtn" aria-label="Previous plan">◀</button>
+            <button class="carousel-btn" id="nextBtn" aria-label="Next plan">▶</button>
+          </div>
+          <div class="carousel-indicator" id="carouselIndicator">1 / 3</div>
+        </div>
+      </div>
+
+      <div class="link-row">
+        <a href="contact.html">I want to talk about a plan ✉️</a>
+        <a href="testimonials.html">See what people say 🗣️</a>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> Xiveau · All-in-one home management · West Island
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById("hamburger");
+    const mobileNav = document.getElementById("mobileNav");
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener("click", () => {
+        const isOpen = hamburger.classList.toggle("active");
+        mobileNav.style.display = isOpen ? "flex" : "none";
+        hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+      mobileNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          mobileNav.style.display = "none";
+          hamburger.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    const track = document.getElementById("carouselTrack");
+    const slides = Array.from(track.children);
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const indicator = document.getElementById("carouselIndicator");
+
+    let index = 0;
+    function updateCarousel() {
+      const width = track.clientWidth;
+      track.style.transform = `translateX(${-index * width}px)`;
+      indicator.textContent = `${index + 1} / ${slides.length}`;
+    }
+    nextBtn.addEventListener("click", () => {
+      index = (index + 1) % slides.length;
+      updateCarousel();
+    });
+    prevBtn.addEventListener("click", () => {
+      index = (index - 1 + slides.length) % slides.length;
+      updateCarousel();
+    });
+    window.addEventListener("resize", updateCarousel);
+    updateCarousel();
+  </script>
+</body>
+</html>
